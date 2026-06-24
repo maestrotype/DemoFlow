@@ -1,0 +1,99 @@
+@use 'src/app/shared/styles/mixins/focus' as *;
+
+.btn-primary, .btn-secondary, .btn-ghost, .btn-outline, .btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans, sans-serif);
+  font-weight: 500;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid transparent;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background var(--duration-fast, 150ms) var(--easing-smooth, ease-out),
+              transform var(--duration-fast, 150ms) var(--easing-smooth, ease-out),
+              border-color var(--duration-fast, 150ms) var(--easing-smooth, ease-out),
+              box-shadow var(--duration-fast, 150ms) var(--easing-smooth, ease-out);
+  
+  @include focus-ring;
+  
+  &:active:not(.btn-disabled) {
+    transform: scale(0.98);
+  }
+}
+
+.btn-xs {
+  padding: 2px var(--space-2, 8px);
+  font-size: var(--text-2xs, 11px);
+}
+
+.btn-sm {
+  padding: var(--space-1, 4px) var(--space-3, 12px);
+  font-size: var(--text-xs, 12px);
+}
+
+.btn-md {
+  padding: var(--space-2, 8px) var(--space-4, 16px);
+  font-size: var(--text-base, 14px);
+}
+
+.btn-lg {
+  padding: var(--space-3, 12px) var(--space-5, 20px);
+  font-size: var(--text-md, 16px);
+}
+
+.btn-primary {
+  background: var(--color-accent, #7c5ce7);
+  color: #ffffff;
+  
+  &:hover:not(.btn-disabled) {
+    background: var(--color-accent-hover, #9b59e8);
+    box-shadow: var(--shadow-glow-accent, 0 0 15px rgba(124, 92, 231, 0.2));
+  }
+}
+
+.btn-secondary {
+  background: var(--color-bg-surface, #16182a);
+  border-color: var(--color-border, #20222f);
+  color: var(--color-text-primary, #f0f0f7);
+  
+  &:hover:not(.btn-disabled) {
+    background: var(--color-bg-subtle, #191b2b);
+    border-color: var(--color-text-secondary, #96a0b8);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-secondary, #96a0b8);
+  
+  &:hover:not(.btn-disabled) {
+    background: var(--color-bg-subtle, #191b2b);
+    color: var(--color-text-primary, #f0f0f7);
+  }
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--color-border, #20222f);
+  color: var(--color-text-primary, #f0f0f7);
+  
+  &:hover:not(.btn-disabled) {
+    border-color: var(--color-accent, #7c5ce7);
+    color: var(--color-accent, #7c5ce7);
+  }
+}
+
+.btn-danger {
+  background: var(--color-error, #f87171);
+  color: #ffffff;
+  
+  &:hover:not(.btn-disabled) {
+    background: hsl(3, 85%, 52%);
+  }
+}
+
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

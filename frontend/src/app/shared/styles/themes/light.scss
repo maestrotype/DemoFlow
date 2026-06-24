@@ -1,0 +1,39 @@
+@use '../tokens/colors' as *;
+
+[data-theme="light"] {
+  --color-bg-base: hsl(220 20% 97%);
+  --color-bg-elevated: hsl(0 0% 100%);
+  --color-bg-surface: hsl(220 20% 99%);
+  --color-bg-overlay: hsl(220 15% 95%);
+  --color-bg-subtle: hsl(220 20% 96%);
+  --color-bg-glass: hsl(0 0% 100% / 70%);
+
+  --color-border: hsl(220 15% 88%);
+  --color-border-subtle: hsl(220 15% 93%);
+  --color-border-focus: hsl(#{$accent-h} #{$accent-s} 55% / 50%);
+  --color-border-glass: hsl(0 0% 0% / 8%);
+  --color-border-error: hsl(3 85% 50% / 50%);
+
+  --color-accent: hsl(#{$accent-h} #{$accent-s} 55%);
+  --color-accent-hover: hsl(#{$accent-h} #{$accent-s} 48%);
+  --color-accent-active: hsl(#{$accent-h} #{$accent-s} 62%);
+  --color-accent-subtle: hsl(#{$accent-h} #{$accent-s} 55% / 10%);
+
+  --color-success: hsl(#{$success-h} #{$success-s} 38%);
+  --color-success-subtle: hsl(#{$success-h} #{$success-s} 38% / 10%);
+
+  --color-warning: hsl(#{$warning-h} #{$warning-s} 42%);
+  --color-warning-subtle: hsl(#{$warning-h} #{$warning-s} 42% / 10%);
+
+  --color-error: hsl(#{$error-h} #{$error-s} 48%);
+  --color-error-subtle: hsl(#{$error-h} #{$error-s} 48% / 10%);
+
+  --color-info: hsl(#{$info-h} #{$info-s} 40%);
+  --color-info-subtle: hsl(#{$info-h} #{$info-s} 40% / 10%);
+
+  --color-text-primary: hsl(225 25% 12%);
+  --color-text-secondary: hsl(225 15% 38%);
+  --color-text-muted: hsl(225 12% 58%);
+  --color-text-placeholder: hsl(225 12% 65%);
+  --color-text-disabled: hsl(225 12% 72%);
+}

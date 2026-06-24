@@ -1,0 +1,9 @@
+@if (isVisible()) {
+  <div [class]="toastClass()">
+    <div class="toast-content">
+      <span class="toast-icon">{{ icon() }}</span>
+      <span class="toast-message">{{ message() }}</span>
+    </div>
+    <button class="toast-close" (click)="closeToast()">×</button>
+  </div>
+}

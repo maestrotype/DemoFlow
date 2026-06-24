@@ -1,0 +1,109 @@
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: backdropFadeIn var(--duration-normal, 250ms) var(--easing-smooth, ease-out);
+}
+
+.dialog-panel {
+  background: var(--color-bg-overlay, rgba(30, 32, 48, 0.85));
+  border: 1px solid var(--color-border-glass, rgba(255, 255, 255, 0.08));
+  box-shadow: var(--shadow-lg, 0 24px 64px rgba(0, 0, 0, 0.6));
+  border-radius: var(--radius-lg, 16px);
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  overflow: hidden;
+  animation: dialogScaleIn var(--duration-normal, 250ms) var(--easing-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+}
+
+.dialog-sm {
+  width: 90%;
+  max-width: 400px;
+}
+
+.dialog-md {
+  width: 90%;
+  max-width: 600px;
+}
+
+.dialog-lg {
+  width: 90%;
+  max-width: 900px;
+}
+
+.dialog-full {
+  width: 98vw;
+  height: 96vh;
+  max-height: none;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4, 16px) var(--space-6, 24px);
+  border-bottom: 1px solid var(--color-border, #20222f);
+
+  h3 {
+    margin: 0;
+    font-family: var(--font-sans, sans-serif);
+    font-size: var(--text-lg, 18px);
+    font-weight: 600;
+    color: var(--color-text-primary, #f0f0f7);
+  }
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: var(--color-text-secondary, #96a0b8);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color var(--duration-fast, 150ms) ease;
+
+  &:hover {
+    color: var(--color-text-primary, #f0f0f7);
+  }
+}
+
+.dialog-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-6, 24px);
+  font-family: var(--font-sans, sans-serif);
+  font-size: var(--text-base, 14px);
+  color: var(--color-text-secondary, #96a0b8);
+}
+
+@keyframes backdropFadeIn {
+  from {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+@keyframes dialogScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

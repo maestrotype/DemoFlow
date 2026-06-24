@@ -1,0 +1,19 @@
+<div class="textarea-group" [class.textarea-disabled]="disabled()">
+  @if (label()) {
+    <label [attr.for]="id()">{{ label() }}</label>
+  }
+  <textarea
+    [id]="id()"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [rows]="rows()"
+    [value]="value()"
+    (input)="onInputChange($event)"
+    (blur)="onInputBlur()"
+    class="form-textarea"
+    [class.input-error]="error()"
+  ></textarea>
+  @if (error()) {
+    <span class="error-text">{{ error() }}</span>
+  }
+</div>

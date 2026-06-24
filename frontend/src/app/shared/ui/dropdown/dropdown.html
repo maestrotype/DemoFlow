@@ -1,0 +1,28 @@
+<div class="dropdown-container">
+  <div class="dropdown-trigger" (click)="toggleDropdown()">
+    <ng-content select="[trigger]"></ng-content>
+  </div>
+  
+  @if (isOpen()) {
+    <div class="dropdown-overlay" (click)="closeDropdown()"></div>
+    <div class="dropdown-menu">
+      @if (items().length > 0) {
+        <ul class="dropdown-list">
+          @for (item of items(); track item.id) {
+            <li 
+              class="dropdown-item" 
+              [class.item-disabled]="item.disabled"
+              (click)="onItemClick(item)">
+              @if (item.icon) {
+                <span class="item-icon">{{ item.icon }}</span>
+              }
+              <span class="item-label">{{ item.label }}</span>
+            </li>
+          }
+        </ul>
+      } @else {
+        <ng-content select="[menu]"></ng-content>
+      }
+    </div>
+  }
+</div>

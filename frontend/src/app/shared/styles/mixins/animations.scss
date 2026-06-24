@@ -1,0 +1,42 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin animate-fade-in($duration: var(--duration-normal, 250ms)) {
+  animation: fadeIn $duration var(--easing-smooth, ease-out) forwards;
+}
+
+@mixin animate-scale-in($duration: var(--duration-normal, 250ms)) {
+  animation: scaleIn $duration var(--easing-spring, cubic-bezier(0.34, 1.56, 0.64, 1)) forwards;
+}
+
+@mixin animate-slide-up($duration: var(--duration-normal, 250ms)) {
+  animation: slideUp $duration var(--easing-smooth, ease-out) forwards;
+}
