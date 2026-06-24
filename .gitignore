@@ -1,0 +1,22 @@
+# Dependencies
+frontend/node_modules
+backend/node_modules
+
+# Build
+frontend/dist
+backend/dist
+
+# Logs
+*.log
+
+# Env
+.env
+.env.local
+.env.production
+
+# OS
+.DS_Store
+
+# IDE
+.vscode
+.idea
