@@ -1,4 +1,4 @@
-@use 'src/app/shared/styles/mixins/focus' as *;
+@use '../../styles/mixins/focus' as *;
 
 .btn-primary, .btn-secondary, .btn-ghost, .btn-outline, .btn-danger {
   display: inline-flex;

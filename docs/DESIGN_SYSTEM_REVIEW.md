@@ -28,7 +28,7 @@ We evaluated the architectural robustness, visual styling potential, maintainabi
 *   **Manual Focus Trap:** While the modal layout is focus-trap ready, it relies on external feature directives to trap tab focus in the browser.
 
 ### 2.3 Scalability Risks
-*   **Sass Dependency on Root Mixins:** Components compile with `@import 'src/app/shared/styles/mixins/glass.scss'`. While this avoids deep relative paths, it means changes in mixins require a full rebuild of all component SCSS files.
+*   **Sass Dependency on Root Mixins:** Components compile with `@import '../styles/mixins/glass.scss'`. While this avoids deep relative paths, it means changes in mixins require a full rebuild of all component SCSS files.
 *   **CSS Variable Collision:** Unprefixed variables like `--space-1` or `--shadow-sm` could collide if the app imports other third-party component libraries. We should consider prefixing variables with `--df-` (e.g. `--df-space-1`) in future iterations.
 
 ---

@@ -1,4 +1,4 @@
-@use 'src/app/shared/styles/mixins/glass' as *;
+@use '../../styles/mixins/glass' as *;
 
 .card {
   padding: var(--space-5, 20px);
