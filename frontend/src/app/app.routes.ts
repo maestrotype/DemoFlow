@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 export const routes: Routes = [
   // Redirect root to dashboard
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -49,15 +48,16 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./pages/editor/editor').then(m => m.EditorPageComponent)
       }
-    ]
+    ] as const,
   },
 
   // Public Player Zone
   {
     path: 'demo/:shareId',
-    loadComponent: () => import('./pages/player/player').then(m => m.PlayerPageComponent)
+    loadComponent: () => import('./pages/player/player').then(m => m.PlayerPageComponent),
   },
 
   // Fallback redirect
   { path: '**', redirectTo: 'dashboard' }
 ];
+

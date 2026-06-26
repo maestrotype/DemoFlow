@@ -1,2 +1,3 @@
 export { AuthFormComponent } from './auth-form';
-export { AuthFormMode } from './auth-form.types';
+export type { AuthFormMode } from './auth-form.types';
+
