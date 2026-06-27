@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@use './app/shared/styles/tokens/spacing.scss';
+@use './app/shared/styles/tokens/typography.scss';
+@use './app/shared/styles/tokens/radius.scss';
+@use './app/shared/styles/tokens/shadows.scss';
+@use './app/shared/styles/tokens/motion.scss';
+@use './app/shared/styles/tokens/z-index.scss';
+
+// Theme tokens (will be overridden by theme-specific styles)
+@use './app/shared/styles/themes/dark.scss';
+@use './app/shared/styles/themes/light.scss';
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+}
+

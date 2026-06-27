@@ -1,0 +1,7 @@
+@mixin focus-ring {
+  outline: none;
+  
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px var(--color-border-focus, #7c5ce7);
+  }
+}

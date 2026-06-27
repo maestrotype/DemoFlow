@@ -1,0 +1,20 @@
+<div class="input-group" [class.input-group-disabled]="disabled()">
+  @if (label()) {
+    <label [attr.for]="id()">{{ label() }}</label>
+  }
+  <input
+    [id]="id()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [value]="value()"
+    (input)="onInputChange($event)"
+    (blur)="onInputBlur()"
+    class="form-input"
+    [class.input-error]="error()"
+    [class.input-success]="success()"
+  />
+  @if (error()) {
+    <span class="error-text">{{ error() }}</span>
+  }
+</div>

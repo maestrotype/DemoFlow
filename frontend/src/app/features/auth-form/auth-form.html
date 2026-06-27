@@ -1,0 +1,35 @@
+<form class="auth-form" (submit)="onSubmit($event)">
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input
+      id="email"
+      type="email"
+      placeholder="you@example.com"
+      autocomplete="email"
+      required
+    />
+  </div>
+
+  @if (mode() !== 'forgot-password') {
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        placeholder="••••••••"
+        autocomplete="current-password"
+        required
+      />
+    </div>
+  }
+
+  <button type="submit" class="submit-btn">
+    @if (mode() === 'login') {
+      Sign In
+    } @else if (mode() === 'register') {
+      Create Account
+    } @else {
+      Send Instructions
+    }
+  </button>
+</form>

@@ -957,5 +957,29 @@ Complete list of all CSS Custom Properties.
 
 ---
 
-*Last updated: 2026-06-24*
+## Design System Token Adoption Audit
+
+> Merged from `FRONTEND_AUDIT.md` (audited 2026-06-25). Tracks actual token usage in component styles.
+
+| Token Category | Defined | Referenced in Components | Coverage |
+|---|:---:|:---:|:---:|
+| Spacing (`--space-*`) | 15 | 8 (`1,2,3,4,5,6,8,10`) | 53% |
+| Typography (`--text-*`) | 12 | 6 (`2xs,xs,sm,base,md,xl,3xl`) | 50% |
+| Radius (`--radius-*`) | 7 | 2 (`sm,md`) | 29% |
+| Shadows (`--shadow-*`) | 4 | 2 (`lg, glow-accent`) | 50% |
+| Colors (semantic) | ~30 | ~12 | 40% |
+| Motion (`--duration-*`, `--easing-*`) | 8 | 2 (`fast, smooth`) | 25% |
+| Z-index (`--z-index-*`) | 6 | 0 | **0%** |
+
+**Known gaps:**
+- `glass.scss` mixin (`@mixin glass-panel`, `@mixin glass-text`) — defined but never `@include`d anywhere.
+- `animations.scss` mixins (`animate-fade-in`, `animate-scale-in`, `animate-slide-up`) — defined but never applied.
+- `--shadow-glow-accent` uses raw `rgba(124, 92, 231, 0.2)` instead of HSL token variables.
+- Z-index tokens (`--z-index-*`) are defined in `tokens/z-index.scss` but have 0% adoption in templates.
+
+*Update this table after each sprint to track adoption progress.*
+
+---
+
+*Last updated: 2026-06-27*
 *Design System version must be bumped whenever tokens are added or changed.*

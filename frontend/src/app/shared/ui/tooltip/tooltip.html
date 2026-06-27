@@ -1,0 +1,8 @@
+<div class="tooltip-container" (mouseenter)="show()" (mouseleave)="hide()" (focusin)="show()" (focusout)="hide()">
+  <ng-content></ng-content>
+  @if (isVisible()) {
+    <div [class]="tooltipClass()">
+      {{ text() }}
+    </div>
+  }
+</div>

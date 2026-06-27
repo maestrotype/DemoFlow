@@ -1,0 +1,13 @@
+<nav class="tabs-nav">
+  <ul class="tabs-list">
+    @for (tab of items(); track tab.id) {
+      <li 
+        class="tab-item"
+        [class.tab-active]="tab.id === activeId()"
+        [class.tab-disabled]="tab.disabled"
+        (click)="selectTab(tab)">
+        {{ tab.label }}
+      </li>
+    }
+  </ul>
+</nav>

@@ -1,0 +1,22 @@
+@use '../../styles/mixins/glass' as *;
+
+.card {
+  padding: var(--space-5, 20px);
+  border-radius: var(--radius-md, 10px);
+  box-sizing: border-box;
+}
+
+.card-solid {
+  background: var(--color-bg-surface, #16182a);
+  border: 1px solid var(--color-border, #20222f);
+}
+
+.card-glass {
+  @include glass-panel;
+}
+
+.card-elevated {
+  background: var(--color-bg-overlay, #1e2030);
+  border: 1px solid var(--color-border-subtle, #141624);
+  box-shadow: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.4));
+}

@@ -1,0 +1,38 @@
+.spinner {
+  display: inline-block;
+  color: var(--color-accent, #7c5ce7);
+  animation: spinnerRotate 1s linear infinite;
+  
+  .bg-ring {
+    opacity: 0.15;
+  }
+  
+  .active-ring {
+    stroke-dasharray: 62;
+    stroke-dashoffset: 46;
+  }
+}
+
+.spinner-sm {
+  width: var(--space-4, 16px);
+  height: var(--space-4, 16px);
+}
+
+.spinner-md {
+  width: var(--space-8, 32px);
+  height: var(--space-8, 32px);
+}
+
+.spinner-lg {
+  width: var(--space-12, 48px);
+  height: var(--space-12, 48px);
+}
+
+@keyframes spinnerRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,13 @@
+@if (isOpen()) {
+  <div class="dialog-backdrop" (click)="onBackdropClick()">
+    <div [class]="dialogClass()" (click)="$event.stopPropagation()">
+      <header class="dialog-header">
+        <h3>{{ title() }}</h3>
+        <button class="close-btn" (click)="closeDialog()">×</button>
+      </header>
+      <main class="dialog-body">
+        <ng-content></ng-content>
+      </main>
+    </div>
+  </div>
+}

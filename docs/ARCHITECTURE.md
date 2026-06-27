@@ -1494,6 +1494,230 @@ CORS_ORIGINS=https://demoflow.io,http://localhost:4200
 
 ---
 
-*Last updated: 2026-06-24*  
+## 14. Project Principles & Non-Negotiable Rules
+
+> Merged from `PROJECT_PRINCIPLES.md`. These rules govern every code change in the project.
+
+### 14.1 Core Principles
+
+1. **Architecture First** — Never choose a fast solution over an architectural one. No temporary fixes — "will fix later" is forbidden. Every component/service/module must be maintainable by a Principal Engineer.
+2. **Standalone Components & Modern Angular** — Use Angular 20+ with `standalone: true`. Signals-first: `input()`, `output()`, `model()`, `signal()`, `computed()`, `effect()`. Avoid `ngOnInit` and `subscribe()` where possible. Strict `OnPush`, no change detection leaks.
+3. **Feature-Sliced Design (FSD)** — Strict dependency direction: `core → shared → entities → features → widgets → pages → layouts`. No deep imports — always use barrel files (`index.ts`).
+4. **Design System** — Every visual element must come from the design system. Use SCSS tokens, CSS variables — never hard-coded colors or margins. Prohibit `!important`, inline styles, or `style="..."`.
+5. **SSR & Hydration Safety** — SSR-first mindset: do not use `window`, `document`, `localStorage` without platform guards (`isPlatformBrowser(platformId)`).
+6. **Backend (NestJS) Clean Architecture** — Use Cases → Domain. Framework independence: domain must know nothing about NestJS. Dependency inversion via interfaces.
+7. **TypeScript Strictness** — No `any`. Strict null checks. Use `readonly`, enums, union types. Single responsibility per file.
+
+### 14.2 File Structure Rules
+
+Each component **must** have:
+```
+component.ts
+component.html
+component.scss
+component.types.ts  // if needed
+index.ts            // barrel export
+```
+
+Never: inline template/stylesheet, components > 400 LOC without decomposition.
+
+All modules must export public API through `index.ts`.
+
+### 14.3 Style Guide
+
+- **SCSS:** Use tokens from design system. Limit nesting to 3 levels max. No duplicate styles — extract mixins.
+- **TypeScript:** `const`, `readonly` whenever possible. Avoid `ngOnInit()` where signal-based lifecycle is available.
+
+### 14.4 Quality Gates
+
+Every PR must pass:
+- ✅ Project compiles (`ng build`)
+- ✅ No new warnings
+- ✅ No `any` or `// @ts-ignore`
+- ✅ All imports strict
+- ✅ No hard-coded values (use tokens)
+- ✅ No temporary code
+
+### 14.5 Development Workflow
+
+1. Before change: read architecture, understand why existing.
+2. After error: do not fix immediately — find root cause, explain it, propose solution.
+3. After success: update `docs/AI_PROGRESS.md`.
+4. After session end: update `AI_PROGRESS.md` and write `SESSION SUMMARY`.
+
+### 14.6 Forbidden Patterns
+
+❌ Inline HTML/SCSS  
+❌ Deep imports (`../services/...`)  
+❌ Duplicate buttons/modals (use shared-ui)  
+❌ Dynamic `innerHTML`, direct DOM manipulation  
+❌ Global styles without necessity  
+❌ `ng-content` for component composition  
+❌ Hardcoded numbers, colors, lengths  
+### 14.7 Codebase Skeleton Best Practices & Mitigation Rules
+
+> Merged from `SKELETON_REVIEW.md`.
+
+#### 14.7.1 Framework Independence in Use Cases (Backend)
+To prevent NestJS framework coupling in the Clean Architecture Application layer:
+1. **Never** use `@Injectable()` or `@Inject()` decorators in domain Use Case classes. Use plain TypeScript constructors instead.
+2. Register use cases in their respective NestJS modules using a factory provider configuration.
+
+*Example Pattern:*
+```typescript
+// Pure TypeScript Use Case (backend/src/application/use-cases/create-project.use-case.ts)
+export class CreateProjectUseCase {
+  constructor(private readonly projectRepository: IProjectRepository) {}
+  async execute(workspaceId: string, title: string) {
+    return this.projectRepository.create({ workspaceId, title });
+  }
+}
+
+// Module registration (backend/src/modules/project.module.ts)
+@Module({
+  providers: [
+    PrismaService,
+    { provide: 'IProjectRepository', useClass: ProjectRepositoryImpl },
+    {
+      provide: CreateProjectUseCase,
+      useFactory: (repo: IProjectRepository) => new CreateProjectUseCase(repo),
+      inject: ['IProjectRepository']
+    }
+  ]
+})
+export class ProjectModule {}
+```
+
+#### 14.7.2 Path Mapping Aliases (tsconfig.json)
+Avoid brittle relative imports (e.g. `../../widgets/...`). Enforce root-level path aliases for all FSD layers:
+```json
+"paths": {
+  "@core/*": ["src/app/core/*"],
+  "@shared/*": ["src/app/shared/*"],
+  "@entities/*": ["src/app/entities/*"],
+  "@features/*": ["src/app/features/*"],
+  "@widgets/*": ["src/app/widgets/*"],
+  "@pages/*": ["src/app/pages/*"],
+  "@layouts/*": ["src/app/layouts/*"]
+}
+```
+
+#### 14.7.3 Non-Blocking Canvas Initializations (Frontend SSR Safety)
+Since Node.js lacks browser globals (`window`, `document`), initializing interactive canvas libraries (PIXI.js, Canvas2D, Three.js) during server-side rendering causes build crashes.
+- **Rule:** Wrap all canvas rendering engine initializations inside `afterNextRender` lifecycle callbacks or `isPlatformBrowser(platformId)` guards.
+
+#### 14.7.4 Non-Blocking Angular Hydration (Defer Blocks)
+Wrap non-critical widgets (recent projects, media library grids) in Angular `@defer` blocks to prevent page load delays:
+```html
+@defer (on viewport) {
+  <app-recent-projects></app-recent-projects>
+} @placeholder {
+  <div class="skeleton-loader">Loading projects...</div>
+}
+```
+
+#### 14.7.5 Non-Blocking Media Compiling (Backend Event Loop Safety)
+Do not block the Node.js event loop by executing FFmpeg commands directly in the main NestJS API thread. Run them sequentially using an in-memory task runner queue or separate worker threads/services.
+
+---
+
+## 15. Feature Phase Matrix
+
+> Merged from `FEATURES.md`. Maps every user-facing feature to its release phase and primary API endpoint.
+
+| Category | Feature Name | MVP 🔴 | v1.0 🟡 | v1.5 🟢 | v2.0+ ⚫ | API Endpoint |
+|:---|:---|:---:|:---:|:---:|:---:|:---|
+| **Auth** | Register | ✓ | | | | `POST /auth/register` |
+| | Login | ✓ | | | | `POST /auth/login` |
+| | Refresh Token | ✓ | | | | `POST /auth/refresh` |
+| | Forgot Password | ✓ | | | | `POST /auth/forgot-password` |
+| | Magic Link | | ✓ | | | `POST /auth/magic-link` |
+| | SSO / SAML | | | | ✓ | `POST /auth/sso` |
+| **Project** | Recent Projects | ✓ | | | | `GET /projects` |
+| | Create Demo | ✓ | | | | `POST /projects` |
+| | Search | ✓ | | | | `GET /projects?search=query` |
+| | Duplication | | ✓ | | | `POST /projects/:id/duplicate` |
+| | Template Starters (3) | ✓ | | | | System Seed |
+| | Template Gallery | | ✓ | | | `GET /templates` |
+| **Editor** | Canvas | ✓ | | | | Angular Client Component |
+| | Timeline | ✓ | | | | `POST /projects/:id/scenes` |
+| | Layers Panel | ✓ | | | | Angular Client Component |
+| | Properties Panel | ✓ | | | | Angular Client Component |
+| | Media/Text Layer | ✓ | | | | `PATCH /scenes/:id` |
+| | Arrow/Hotspot | ✓ | | | | `PATCH /scenes/:id` |
+| | Callout Layer | ✓ | | | | `PATCH /scenes/:id` |
+| | Zoom Area Layer | | ✓ | | | `PATCH /scenes/:id` |
+| | Blur/Redaction | | | ✓ | | `PATCH /scenes/:id` |
+| | Shape Layer | | | ✓ | | `PATCH /scenes/:id` |
+| | Undo / Redo | ✓ | | | | Angular Client State |
+| | Auto-save | ✓ | | | | `PATCH /scenes/:id` (Debounced) |
+| | Transitions (Fade) | | ✓ | | | `PATCH /scenes/:id` (FFmpeg) |
+| | Transitions (All) | | | ✓ | | `PATCH /scenes/:id` (FFmpeg) |
+| | Layer Animations | | | ✓ | | `PATCH /scenes/:id` (CSS/Web) |
+| **Media** | Multi-upload | ✓ | | | | `POST /media/upload` |
+| | Auto-thumbnails | ✓ | | | | Sharp / FFmpeg Worker |
+| | Library Grid | ✓ | | | | `GET /media` |
+| | Bulk Operations | | | ✓ | | `POST /media/bulk-action` |
+| **AI** | Image Analysis | ✓ | | | | `POST /media/:id/analyze` |
+| | Auto-scenes | ✓ | | | | Qwen-VL Mapper |
+| | Copy Assistant | | ✓ | | | `POST /ai/generate-copy` |
+| | Voiceover (TTS) | | | | ✓ | `POST /ai/generate-tts` |
+| **Export** | MP4 Compiler | ✓ | | | | `POST /export` (FFmpeg) |
+| | Watermark | ✓ | | | | `POST /export` (Overlay) |
+| | GIF Export | | ✓ | | | `POST /export?format=gif` |
+| | HTML Web Export | | ✓ | | | `POST /export?format=web` |
+| | Job Queue (BullMQ) | | | ✓ | | BullMQ + Redis |
+| **Sharing** | Public Page | ✓ | | | | `GET /demo/:shareId` |
+| | Password Lock | | ✓ | | | `POST /demo/:shareId/lock` |
+| | Custom CTA | | ✓ | | | `PATCH /projects/:id/settings` |
+| | Custom Domain | | | | ✓ | Route53 / Let's Encrypt |
+| **Teams** | Workspace Setup | ✓ | | | | `POST /workspace` |
+| | Invites | | ✓ | | | `POST /workspace/invites` |
+| | Basic Owner/Member | | ✓ | | | `GET /workspace/members` |
+| | Full RBAC | | | ✓ | | `PATCH /workspace/members/:id` |
+| | Comments | | | | ✓ | WebSockets / Comment DB |
+| **Billing** | Stripe Redirect | ✓ | | | | `POST /billing/checkout` |
+| | Sync Webhooks | ✓ | | | | `POST /billing/webhooks` |
+| | Limit Checks | | ✓ | | | `GET /billing/limits` |
+
+---
+
+## 16. Architecture & Design Review Mitigations
+
+> Merged from `ARCHITECTURE_REVIEW.md`.
+
+### 16.1 Reconciled Contradictions
+
+1. **Authentication Strategy (Magic Links vs. Password):** Magic Links are moved to Post-Launch (v1.0+) scope. The core MVP authentication strategy strictly uses **email/password** with a `password_reset_tokens` table.
+2. **Workspace & Tenant Linking:** The `workspace_members` junction table is included in the MVP DB schema with a strict `UNIQUE(workspace_id, user_id)` constraint. This prevents massive query-refactoring tasks in v1.0.
+3. **Session Persistence (Refresh Token Table):** The `refresh_tokens` table is included in the MVP schema to support multi-device logins without destroying session states upon token rotation.
+
+### 16.2 Upload Cleanup & Orphaned Files
+To prevent S3/R2 storage costs growing indefinitely due to orphaned screenshots/recordings, a soft-delete cleanup event handler or cron job is defined. When a `MediaAsset` is permanently deleted (after a 30-day safety retention period), the system purges the actual physical files in object storage.
+
+### 16.3 Server-Side Rendering (SSR) & Dynamic Hydration
+- **Editor CSR-Only:** The `/projects/:id/editor` route must be strictly configured as Client-Side Rendered (CSR-only) via the Angular routing configuration.
+- **Dynamic Player Hydration:** The public player (`/demo/:shareId`) SSR server only renders the static HTML wrapper and `<meta>` tags (for crawler/embed previews). The interactive canvas component must be wrapped in `@defer` blocks to load client-side.
+
+### 16.4 Security Mitigations
+- **PostgreSQL Row-Level Security (RLS):** Enabled on all tenant-scoped tables from Day 1 as an ironclad safety net. The application middleware sets `app.current_workspace_id` context.
+- **FFmpeg Shell Injection Protection:** Do not spawn raw child shells directly (e.g. `exec()`). Use structured wrappers (`fluent-ffmpeg`) or pass arguments as strict string arrays using `spawn`, and enforce strict filename character sanitization.
+- **Exposed Media Assets:** Use **Cloudflare R2 Presigned URLs** (expiry: 2 hours) for editor assets. The frontend must query the API for fresh presigned URLs before loading assets onto the canvas.
+
+### 16.5 Scalability & Hosting Mitigations
+- **Event Loop Starvation (FFmpeg):** To prevent multiple concurrent video exports freezing the VPS, FFmpeg commands are queued in an in-memory task runner queue with a concurrency limit of 1.
+- **Ollama Inference:** During development, Ollama runs Qwen-VL locally on the development machine. In production, to avoid VPS CPU starvation, the API configures a cloud vision service (like Workers AI or a lightweight Vision API) rather than running Ollama locally.
+
+### 16.6 UX Mitigations
+- **Keyboard Navigation:** The public player supports keyboard events (`Space` for play/pause, `ArrowRight` / `ArrowLeft` for scene navigation).
+- **Pixel Mapping:** Force the canvas editor wrapper to render at a virtual fixed resolution (e.g. `1920x1080` coordinate space) and use CSS `transform: scale()` to fit different screen aspect ratios cleanly without shifting annotations.
+
+### 16.7 Scope Creep Mitigations
+- **Nx Monorepo:** Setup is deferred. The project starts with simple `/client` and `/api` directories in a single repo.
+- **Active Schema Cleanup:** All non-MVP tables in `schema.prisma` are commented out or deleted from the active migration script until their respective phases.
+
+---
+
+*Last updated: 2026-06-27*  
 *Maintained by: DemoFlow Core Team*  
 *This is a living document — update it when any architectural decision changes*
