@@ -4,6 +4,8 @@
 @use './app/shared/styles/tokens/shadows.scss';
 @use './app/shared/styles/tokens/motion.scss';
 @use './app/shared/styles/tokens/z-index.scss';
+
+// Theme tokens (will be overridden by theme-specific styles)
 @use './app/shared/styles/themes/dark.scss';
 @use './app/shared/styles/themes/light.scss';
 
@@ -14,3 +16,4 @@ body {
   color: var(--color-text-primary);
   min-height: 100vh;
 }
+
