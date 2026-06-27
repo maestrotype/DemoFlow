@@ -13,12 +13,15 @@
 
 This document describes the **complete target schema** (v2.0 destination).
 
-For the **MVP (Weeks 1–8)**, only 9 tables are required. See the table below.
+Based on the architecture audit, **workspace_members**, **refresh_tokens**, and **password_reset_tokens** tables have been promoted to the MVP to prevent massive refactoring overhead and support multi-device sessions and secure forgot-password flows.
 
 | Table | MVP | v1.0 | v1.5 | v2.0 |
 |---|:---:|:---:|:---:|:---:|
 | `users` | ✅ | ✅ | ✅ | ✅ |
 | `workspaces` | ✅ | ✅ | ✅ | ✅ |
+| `workspace_members` | ✅ | ✅ | ✅ | ✅ |
+| `refresh_tokens` | ✅ | ✅ | ✅ | ✅ |
+| `password_reset_tokens` | ✅ | ✅ | ✅ | ✅ |
 | `projects` | ✅ | ✅ | ✅ | ✅ |
 | `scenes` | ✅ | ✅ | ✅ | ✅ |
 | `media_assets` | ✅ | ✅ | ✅ | ✅ |
@@ -26,8 +29,6 @@ For the **MVP (Weeks 1–8)**, only 9 tables are required. See the table below.
 | `export_jobs` | ✅ | ✅ | ✅ | ✅ |
 | `subscriptions` | ✅ | ✅ | ✅ | ✅ |
 | `project_shares` | ✅ | ✅ | ✅ | ✅ |
-| `workspace_members` | ❌ | ✅ | ✅ | ✅ |
-| `refresh_tokens` | ❌ | ✅ | ✅ | ✅ |
 | `magic_links` | ❌ | ❌ | ✅ | ✅ |
 | `media_asset_tags` | ❌ | ❌ | ✅ | ✅ |
 | `ai_jobs` | ❌ | ❌ | ✅ | ✅ |
@@ -43,14 +44,13 @@ For the **MVP (Weeks 1–8)**, only 9 tables are required. See the table below.
 
 | Area | Full Schema | MVP Approach |
 |---|---|---|
-| Auth tokens | `refresh_tokens` table | httpOnly cookie + simple DB column `refresh_token_hash` on `users` |
-| Magic links | `magic_links` table | Not needed — password reset only via single-use token on `users` |
+| Magic links | `magic_links` table | Not needed — password reset via `password_reset_tokens` |
 | AI jobs | Separate `ai_jobs` queue table | Inline status on `ai_analyses.status` column |
 | Plan limits | `plan_limits` table (flexible) | Hardcoded in NestJS config (`FREE_LIMITS`, `PRO_LIMITS` constants) |
 | Usage records | `usage_records` table | Computed on-demand: `COUNT(export_jobs)` per month |
 | Share analytics | `share_analytics` table | Single `view_count INTEGER` column on `project_shares` |
 | Media tags | `media_asset_tags` table | Not needed at MVP scale |
-| RLS policies | Full PostgreSQL RLS | `workspace_id` WHERE clause on every query (application-layer enforcement) |
+| RLS policies | PostgreSQL RLS | Enabled from Day 1 as an ironclad safety net (application sets `app.current_workspace_id` context) |
 | Templates | `templates` + `template_categories` | 3 hardcoded constants in application code |
 
 ---
@@ -334,6 +334,23 @@ One-time login tokens sent via email.
 - `CHECK (expires_at > created_at)`
 
 **Notes:** Expired and used rows purged by background job daily.
+
+### 4.6 `password_reset_tokens`
+
+One-time secure tokens for forgot-password flow.
+
+| Column | Type | Nullable | Default | Notes |
+|---|---|:---:|---|---|
+| `id` | `UUID` | ✗ | `gen_random_uuid()` | PK |
+| `user_id` | `UUID` | ✗ | — | FK → `users.id` |
+| `token_hash` | `TEXT` | ✗ | — | bcrypt hash of reset token |
+| `expires_at` | `TIMESTAMPTZ` | ✗ | — | `created_at + 1 hour` |
+| `created_at` | `TIMESTAMPTZ` | ✗ | `now()` | |
+
+**Constraints:**
+- `FK user_id → users(id) ON DELETE CASCADE`
+- `UNIQUE (token_hash)`
+- `CHECK (expires_at > created_at)`
 
 ---
 
