@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { AuthFormComponent } from '../../features/auth-form/auth-form';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
   standalone: true,
-  imports: [AuthFormComponent],
+  imports: [AuthFormComponent, RouterLink],
   template: `
     <div class="register-page">
       <h2>Create Account</h2>
       <app-auth-form mode="register"></app-auth-form>
       <div class="auth-links">
-        <a href="/auth/login">Already have an account? Sign in</a>
+        <a routerLink="/auth/login">Already have an account? Sign in</a>
       </div>
     </div>
   `,

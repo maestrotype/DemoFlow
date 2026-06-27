@@ -34,26 +34,31 @@ Theme system implemented:
 - ThemeToggleComponent with OnPush change detection
 - ResolvedTheme computed signal for reactive theme application
 - Media query listener for system theme changes (system mode only)
-- Reduced motion detection via `prefers-reduced-motion`
-
 AuthGuard migrated to functional API:
 - Replaced class-based CanActivate with functional CanActivateFn
 - Uses inject() for Router dependency injection
 - Compatible with Angular 21 standalone APIs
 
----
+## Completed (Latest Update)
+- P0: Fixed href issues in register.ts and forgot-password.ts by replacing `<a href>` with `[routerLink]`
+- P0: Registered `provideHttpClient(withInterceptors([authInterceptor]))` in app.config.ts
+- P0: Updated test to reflect current state of app.html (only `<router-outlet />`)
+- P0: Verified SSR build succeeds with mixed rendering mode
+- P0: All tests passing
+
+### P0 — Must Fix Before Any Feature Work
+
+- [x] **Delete scaffold `app.html`** — 345 lines of Angular "Hello, frontend" boilerplate still ships to production. Keep only `<router-outlet />`.
+- [x] **Register `provideHttpClient(withInterceptors([authInterceptor]))`** in `app.config.ts` — without it, all HTTP features crash at runtime. The `authInterceptor` exists but is never registered.
+- [x] **Fix SSR route config** (`app.routes.server.ts`) — wildcard `RenderMode.Prerender` on `projects/:id/editor` and `demo/:shareId` crashes the build. Use `RenderMode.Server` or `RenderMode.Client` for dynamic segments.
+- [x] **Replace all `<a href>` with `[routerLink]`** in `sidebar.ts`, `login.ts`, `register.ts`, `forgot-password.ts` — causes full page reload, destroys SPA state.
+
+> ✅ All P0 tasks completed. Build and tests passing.
 
 ## Frontend Fixes Required (from FRONTEND_AUDIT.md — 2026-06-25)
 
 > Audit score: ThemeForest Readiness 32/100 · Architecture 62/100 · Maintainability 55/100
 > Shared UI adoption: **0/15 components consumed** (critical).
-
-### P0 — Must Fix Before Any Feature Work
-
-- [ ] **Delete scaffold `app.html`** — 345 lines of Angular "Hello, frontend" boilerplate still ships to production. Keep only `<router-outlet />`.
-- [ ] **Register `provideHttpClient(withInterceptors([authInterceptor]))`** in `app.config.ts` — without it, all HTTP features crash at runtime. The `authInterceptor` exists but is never registered.
-- [ ] **Fix SSR route config** (`app.routes.server.ts`) — wildcard `RenderMode.Prerender` on `projects/:id/editor` and `demo/:shareId` crashes the build. Use `RenderMode.Server` or `RenderMode.Client` for dynamic segments.
-- [ ] **Replace all `<a href>` with `[routerLink]`** in `sidebar.ts`, `login.ts`, `register.ts`, `forgot-password.ts` — causes full page reload, destroys SPA state.
 
 ### P1 — Architecture Integrity
 
@@ -78,4 +83,5 @@ AuthGuard migrated to functional API:
 2026-06-27 — Merged frontend audit open issues from FRONTEND_AUDIT.md
 2026-06-27 — Implemented complete theme system with SSR support, ThemeToggleComponent, and system preference detection
 2026-06-27 — Migrated AuthGuard from class-based CanActivate to functional CanActivateFn
+2026-06-27 — Completed P0 tasks: fixed href issues, registered HttpClient with authInterceptor, updated tests, verified build and tests passing
 

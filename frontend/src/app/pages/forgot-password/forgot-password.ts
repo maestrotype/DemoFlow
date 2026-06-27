@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { AuthFormComponent } from '../../features/auth-form/auth-form';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password-page',
   standalone: true,
-  imports: [AuthFormComponent],
+  imports: [AuthFormComponent, RouterLink],
   template: `
     <div class="forgot-password-page">
       <h2>Reset Password</h2>
       <p class="description">Enter your email and we will send you password reset instructions.</p>
       <app-auth-form mode="forgot-password"></app-auth-form>
       <div class="auth-links">
-        <a href="/auth/login">Back to Sign In</a>
+        <a routerLink="/auth/login">Back to Sign In</a>
       </div>
     </div>
   `,
