@@ -15,12 +15,31 @@
 - SSR configuration cleaned
 - Routing restored after broken app.routes.ts
 - SSR prerender fixed for dynamic routes using mixed rendering mode (Prerender + Server)
+- Theme system implemented with SSR support
+- Theme toggle component created and registered in shared UI barrel exports
+- AuthGuard migrated from deprecated class-based CanActivate to functional CanActivateFn
 
 ## Current Status
 SSR build succeeds with mixed rendering mode:
 - Static routes (`/`, `/dashboard`, `/projects`) use Prerender for SEO benefits
 - Dynamic routes (`/projects/:id/editor`, `/demo/:shareId`) use Server rendering
 - Auth routes and fallback routes use Server rendering
+
+Theme system implemented:
+- ThemeService with dark/light/system modes
+- CSS custom properties for theme tokens (32 variables)
+- System preference detection via `prefers-color-scheme`
+- Local storage persistence for user preferences
+- SSR-safe implementation using `PLATFORM_ID` and `isPlatformBrowser()`
+- ThemeToggleComponent with OnPush change detection
+- ResolvedTheme computed signal for reactive theme application
+- Media query listener for system theme changes (system mode only)
+- Reduced motion detection via `prefers-reduced-motion`
+
+AuthGuard migrated to functional API:
+- Replaced class-based CanActivate with functional CanActivateFn
+- Uses inject() for Router dependency injection
+- Compatible with Angular 21 standalone APIs
 
 ---
 
@@ -57,3 +76,6 @@ SSR build succeeds with mixed rendering mode:
 2026-06-26 — Created docs/AI_PROGRESS.md (this file)
 2026-06-26 — Fixed SSR prerender failures for dynamic routes using mixed rendering mode
 2026-06-27 — Merged frontend audit open issues from FRONTEND_AUDIT.md
+2026-06-27 — Implemented complete theme system with SSR support, ThemeToggleComponent, and system preference detection
+2026-06-27 — Migrated AuthGuard from class-based CanActivate to functional CanActivateFn
+
