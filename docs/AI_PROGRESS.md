@@ -55,6 +55,14 @@ AuthGuard migrated to functional API:
 
 > ✅ All P0 tasks completed. Build and tests passing.
 
+### Component Structure Normalization (Batch 1 - Completed)
+- [x] **Normalize ThemeToggleComponent** — converted inline template/styles to external files (`theme-toggle.html`, `theme-toggle.scss`)
+- [x] **Normalize RegisterPageComponent** — converted inline template/styles to external files (`register.html`, `register.scss`)
+- [x] **Normalize ForgotPasswordPageComponent** — converted inline template/styles to external files (`forgot-password.html`, `forgot-password.scss`)
+- [x] **Normalize ProjectCardComponent** — converted inline template/styles to external files (`project-card.html`, `project-card.scss`)
+
+> ✅ Batch 1 completed: All components follow proper Angular structure with external template and style files. Build verified successful, SSR compatibility preserved, no behavior changes made.
+
 ## Frontend Fixes Required (from FRONTEND_AUDIT.md — 2026-06-25)
 
 > Audit score: ThemeForest Readiness 32/100 · Architecture 62/100 · Maintainability 55/100
@@ -84,21 +92,5 @@ AuthGuard migrated to functional API:
 2026-06-27 — Implemented complete theme system with SSR support, ThemeToggleComponent, and system preference detection
 2026-06-27 — Migrated AuthGuard from class-based CanActivate to functional CanActivateFn
 2026-06-27 — Completed P0 tasks: fixed href issues, registered HttpClient with authInterceptor, updated tests, verified build and tests passing
-
-## Completed (Latest Update)
-- P0: Fixed href issues in register.ts and forgot-password.ts by replacing `<a href>` with `[routerLink]`
-- P0: Registered `provideHttpClient(withInterceptors([authInterceptor]))` in app.config.ts
-- P0: Updated test to reflect current state of app.html (only `<router-outlet />`)
-- P0: Verified SSR build succeeds with mixed rendering mode
-- P0: All tests passing
-
-### Component Structure Normalization (Batch 1 - Completed)
-- [x] **Normalize ThemeToggleComponent** — converted inline template/styles to external files (`theme-toggle.html`, `theme-toggle.scss`)
-- [x] **Normalize RegisterPageComponent** — converted inline template/styles to external files (`register.html`, `register.scss`)
-- [x] **Normalize ForgotPasswordPageComponent** — converted inline template/styles to external files (`forgot-password.html`, `forgot-password.scss`)
-- [x] **Normalize ProjectCardComponent** — converted inline template/styles to external files (`project-card.html`, `project-card.scss`)
-
-> ✅ Batch 1 completed: All components follow proper Angular structure with external template and style files. Build verified successful, SSR compatibility preserved, no behavior changes made.
-
-### P0 — Must Fix Before Any Feature Work
+2026-06-28 — Completed component structure normalization (Batch 1): converted ThemeToggle, Register, ForgotPassword, and ProjectCard components from inline templates/styles to proper external file structure per Angular Style Guide
 
