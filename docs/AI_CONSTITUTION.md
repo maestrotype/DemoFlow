@@ -433,3 +433,34 @@ A task is complete only when:
 * the next engineering task is selected from AI_PROGRESS.md or the user's request
 
 Never mark a task as complete before all applicable items have been addressed.
+
+## Documentation Update Rule
+
+Never create duplicate documentation files.
+
+Never create files such as:
+
+AI_PROGRESS_UPDATED.md
+
+ARCHITECTURE_NEW.md
+
+DESIGN_SYSTEM_V2.md
+
+or similar.
+
+If an existing document cannot be updated,
+stop immediately,
+report the reason,
+and ask the user how to proceed.
+
+Creating duplicate documentation is forbidden.
+
+## Edit Failure Rule
+
+If editing a file fails:
+
+1. Stop.
+2. Report which file could not be modified.
+3. Explain why (tool limitation, merge conflict, read-only, etc.).
+4. Never create a replacement file.
+5. Wait for user instructions.
