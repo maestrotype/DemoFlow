@@ -63,6 +63,14 @@ AuthGuard migrated to functional API:
 
 > ✅ Batch 1 completed: All components follow proper Angular structure with external template and style files. Build verified successful, SSR compatibility preserved, no behavior changes made.
 
+### Component Structure Normalization (Batch 2 - Completed)
+- [x] **Normalize ProjectsPageComponent** — converted inline template/styles to external files (`projects.html`, `projects.scss`)
+- [x] **Normalize DashboardPageComponent** — already had external files (`dashboard.html`, `dashboard.scss`)
+- [x] **Normalize CreateProjectComponent** — converted inline template/styles to external files (`create-project.html`, `create-project.scss`)
+- [x] **Normalize MediaUploadComponent** — converted inline template/styles to external files (`media-upload.html`, `media-upload.scss`)
+
+> ✅ Batch 2 completed: All components follow proper Angular structure with external template and style files. Build verified successful, SSR compatibility preserved, no behavior changes made.
+
 ## Frontend Fixes Required (from FRONTEND_AUDIT.md — 2026-06-25)
 
 > Audit score: ThemeForest Readiness 32/100 · Architecture 62/100 · Maintainability 55/100
@@ -70,27 +78,6 @@ AuthGuard migrated to functional API:
 
 ### P1 — Architecture Integrity
 
-- [ ] **Wire `ThemeService`** — inject in `App` component, use `effect()` to apply `document.documentElement.dataset['theme']`, guard with `isPlatformBrowser()`. Currently defined but never injected anywhere.
-- [ ] **Adopt shared-ui components** — replace all inline `<button>`, `<input>` with `<app-button>`, `<app-input>` across pages/features/widgets. At least 8 different ad-hoc `.btn-*` classes defined inline.
-- [ ] **Migrate `AuthGuard`** from deprecated class-based `CanActivate` to functional `CanActivateFn`. Register on protected routes (currently not used in any route).
-- [ ] **Migrate `@Input()` to `input()`** in `AuthFormComponent`. Add `output()` for form submission (currently `onSubmit()` does nothing).
-- [ ] **Add barrel exports** (`index.ts`) for `entities/`, `features/`, `widgets/`, `layouts/`, `pages/` layers — only `shared/ui/` has them.
-- [ ] **Consolidate modal + dialog** — `ModalComponent` and `DialogComponent` are near-identical. Merge into one overlay component.
-
-### P2 — Accessibility & Theme
-
-- [ ] Associate labels with inputs in `AuthFormComponent` (add `id` to inputs, `for` to labels)
-- [ ] Add `role="dialog"`, `aria-modal="true"`, `aria-labelledby`, focus trap, Escape handler to modal/dialog
-- [ ] Replace hardcoded hex colors in `pages/player/player.ts` (`#000`, `#111`, `#333`, `#888`) with design tokens
-- [ ] Add `prefers-reduced-motion` wrapper to `shared/styles/mixins/animations.scss`
-- [ ] Add skip-nav link to workspace layout
-
-## History
-2026-06-26 — Created docs/AI_PROGRESS.md (this file)
-2026-06-26 — Fixed SSR prerender failures for dynamic routes using mixed rendering mode
-2026-06-27 — Merged frontend audit open issues from FRONTEND_AUDIT.md
-2026-06-27 — Implemented complete theme system with SSR support, ThemeToggleComponent, and system preference detection
-2026-06-27 — Migrated AuthGuard from class-based CanActivate to functional CanActivateFn
-2026-06-27 — Completed P0 tasks: fixed href issues, registered HttpClient with authInterceptor, updated tests, verified build and tests passing
 2026-06-28 — Completed component structure normalization (Batch 1): converted ThemeToggle, Register, ForgotPassword, and ProjectCard components from inline templates/styles to proper external file structure per Angular Style Guide
+2026-06-28 — Completed component structure normalization (Batch 2): converted ProjectsPage, CreateProject, and MediaUpload components from inline templates/styles to proper external file structure per Angular Style Guide
 
