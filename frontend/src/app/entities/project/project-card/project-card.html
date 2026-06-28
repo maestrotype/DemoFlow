@@ -1,0 +1,13 @@
+<div class="project-card">
+  <div class="thumbnail">
+    @if (project().thumbnailUrl) {
+      <img [src]="project().thumbnailUrl" alt="Project preview" />
+    } @else {
+      <div class="placeholder">16:9 Thumbnail Placeholder</div>
+    }
+  </div>
+  <div class="info">
+    <h4>{{ project().title }}</h4>
+    <p class="meta">{{ project().sceneCount }} scenes • {{ project().durationMs / 1000 }}s</p>
+  </div>
+</div>
