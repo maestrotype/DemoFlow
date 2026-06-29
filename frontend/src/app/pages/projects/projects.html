@@ -1,7 +1,42 @@
 <div class="projects-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Projects</h1>
+      <p class="hero-subtitle">
+        Manage your video editing projects, collaborate with your team, and keep production organized from one workspace.
+      </p>
+      <div class="hero-actions">
+        <app-button variant="primary" size="lg">New Project</app-button>
+        <app-button variant="secondary" size="lg">Import Project</app-button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Cards -->
+  <div class="stats-container">
+    <div class="stat-card">
+      <h3 class="stat-value">128</h3>
+      <p class="stat-label">Projects</p>
+    </div>
+    <div class="stat-card">
+      <h3 class="stat-value">42 GB</h3>
+      <p class="stat-label">Storage</p>
+    </div>
+    <div class="stat-card">
+      <h3 class="stat-value">391</h3>
+      <p class="stat-label">Videos</p>
+    </div>
+    <div class="stat-card">
+      <h3 class="stat-value">174</h3>
+      <p class="stat-label">Exports</p>
+    </div>
+  </div>
+
+  <!-- Projects List -->
   <header class="page-header">
     <h1>All Projects</h1>
-    <button class="create-btn">New Project</button>
+    <app-button variant="primary" size="md">New Project</app-button>
   </header>
   <app-recent-projects></app-recent-projects>
 </div>

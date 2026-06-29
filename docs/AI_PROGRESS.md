@@ -151,3 +151,23 @@ AuthGuard migrated to functional API:
 2026-06-28 — Completed component structure normalization (Batch 1): converted ThemeToggle, Register, ForgotPassword, and ProjectCard components from inline templates/styles to proper external file structure per Angular Style Guide
 2026-06-28 — Completed component structure normalization (Batch 2): converted ProjectsPage, CreateProject, and MediaUpload components from inline templates/styles to proper external file structure per Angular Style Guide
 2026-06-28 — Completed component structure normalization (Batch 3): verified AuthFormComponent already adheres to external template/styles with standalone structure and OnPush detection
+## History
+2026-06-28 — Completed component barrel export normalization (Batch 4): all component barrel exports updated to use `.component` suffix
+2026-06-28 — Completed component structure normalization (Batch 3): verified AuthFormComponent already adheres to external template/styles with standalone structure and OnPush detection
+2026-06-28 — Completed component structure normalization (Batch 2): converted ProjectsPage, CreateProject, and MediaUpload components from inline templates/styles to proper external file structure per Angular Style Guide
+2026-06-28 — Completed component structure normalization (Batch 1): converted ThemeToggle, Register, ForgotPassword, and ProjectCard components from inline templates/styles to proper external file structure per Angular Style Guide
+2026-06-27 — Merged frontend audit open issues from FRONTEND_AUDIT.md
+2026-06-27 — Implemented complete theme system with SSR support, ThemeToggleComponent, and system preference detection
+2026-06-27 — Migrated AuthGuard from class-based CanActivate to functional CanActivateFn
+2026-06-27 — Completed P0 tasks: fixed href issues, registered HttpClient with authInterceptor, updated tests, verified build and tests passing
+2026-06-26 — Fixed SSR prerender failures for dynamic routes using mixed rendering mode
+2026-06-26 — Created docs/AI_PROGRESS.md (this file)
+2026-06-26 — Fixed SSR prerender failures for dynamic routes using mixed rendering mode
+2026-06-27 — Merged frontend audit open issues from FRONTEND_AUDIT.md
+2026-06-27 — Implemented complete theme system with SSR support, ThemeToggleComponent, and system preference detection
+2026-06-27 — Migrated AuthGuard from class-based CanActivate to functional CanActivateFn
+2026-06-27 — Completed P0 tasks: fixed href issues, registered HttpClient with authInterceptor, updated tests, verified build and tests passing
+2026-06-28 — Completed component structure normalization (Batch 1): converted ThemeToggle, Register, ForgotPassword, and ProjectCard components from inline templates/styles to proper external file structure per Angular Style Guide
+2026-06-28 — Completed component structure normalization (Batch 2): converted ProjectsPage, CreateProject, and MediaUpload components from inline templates/styles to proper external file structure per Angular Style Guide
+2026-06-28 — Completed component structure normalization (Batch 3): verified AuthFormComponent already adheres to external template/styles with standalone structure and OnPush detection
+2026-06-29 — **Completed Subtask 1: Implemented Projects Hero section with statistics cards**
