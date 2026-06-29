@@ -1,5 +1,5 @@
-import { TestBed } from '@angular/core/testing';
-import { App } from './app';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { App } from './app.component';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -14,11 +14,10 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should not render any content other than router-outlet', async () => {
+  it('should render router-outlet', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 });
-

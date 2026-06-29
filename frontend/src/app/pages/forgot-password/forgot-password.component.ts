@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthFormComponent } from '../../features/auth-form/auth-form';
+import { AuthFormComponent } from '../../features/auth-form';
 import { RouterLink } from '@angular/router';
 
 @Component({

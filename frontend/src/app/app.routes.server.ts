@@ -35,15 +35,11 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender
   },
   
-  // Editor Zone - server-side rendering (dynamic route)
-  {
-    path: 'projects/:id/editor',
-    renderMode: RenderMode.Server
-  },
-  {
-    path: 'projects/:id/editor/',
-    renderMode: RenderMode.Server
-  },
+   // Editor Zone - server-side rendering (dynamic route)
+   {
+     path: 'projects/:id/editor',
+     renderMode: RenderMode.Server
+   },
   
   // Public Player Zone - server-side rendering (dynamic route)
   {

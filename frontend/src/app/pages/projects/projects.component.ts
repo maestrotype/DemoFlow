@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RecentProjectsComponent } from '../../widgets/recent-projects/recent-projects';
+import { RecentProjectsComponent } from '../../widgets/recent-projects';
 
 @Component({
   selector: 'app-projects-page',

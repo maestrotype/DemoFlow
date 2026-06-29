@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TimelineComponent } from '../../widgets/timeline/timeline';
+import { TimelineComponent } from '../../widgets/timeline/timeline.component';
 
 @Component({
   selector: 'app-editor-page',

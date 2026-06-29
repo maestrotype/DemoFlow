@@ -464,3 +464,27 @@ If editing a file fails:
 3. Explain why (tool limitation, merge conflict, read-only, etc.).
 4. Never create a replacement file.
 5. Wait for user instructions.
+
+Refactoring Rule
+
+When renaming files:
+
+Never rename multiple files before verification.
+
+For every renamed component:
+
+1. Create new file.
+
+2. Update imports.
+
+3. Build.
+
+4. Verify.
+
+5. Delete old file.
+
+6. Build again.
+
+Only then continue with the next component.
+
+Never perform project-wide renames without intermediate verification.

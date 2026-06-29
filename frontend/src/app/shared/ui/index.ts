@@ -13,4 +13,4 @@ export * from './skeleton';
 export * from './spinner';
 export * from './card';
 export * from './modal';
-export * from './theme-toggle/theme-toggle.component';
+export * from './theme-toggle';
