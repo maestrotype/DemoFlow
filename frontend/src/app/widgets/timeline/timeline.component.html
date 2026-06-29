@@ -1,0 +1,15 @@
+<div class="timeline">
+  <div class="controls">
+    <button class="play-btn">▶ Play</button>
+  </div>
+  <div class="scenes-strip">
+    @for (scene of scenes(); track scene.id) {
+      <div class="scene-item">
+        <span class="index">{{ scene.orderIndex + 1 }}</span>
+        <span class="title">{{ scene.title }}</span>
+        <span class="duration">{{ scene.durationMs / 1000 }}s</span>
+      </div>
+    }
+    <button class="add-scene-btn">+ Add Scene</button>
+  </div>
+</div>
