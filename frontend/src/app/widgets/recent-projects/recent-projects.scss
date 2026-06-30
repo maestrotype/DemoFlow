@@ -9,7 +9,7 @@
   color: var(--color-text-primary, #ffffff);
 }
 
-.project-list {
+.projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--space-4, 16px);

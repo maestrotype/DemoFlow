@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IProjectRepository } from '../ports/project.repository.interface';
+import type { IProjectRepository } from '../ports/project.repository.interface';
 import { ProjectEntity } from '../../domain/project.entity';
 
 @Injectable()
