@@ -971,6 +971,27 @@ Complete list of all CSS Custom Properties.
 | Motion (`--duration-*`, `--easing-*`) | 8 | 2 (`fast, smooth`) | 25% |
 | Z-index (`--z-index-*`) | 6 | 0 | **0%** |
 
+# Mock Data Quality
+
+Mock data must resemble a real commercial application.
+
+Avoid tutorial names:
+
+❌ Project Alpha
+❌ Test Project
+❌ Demo
+
+Prefer realistic data:
+
+✓ Marketing Campaign
+✓ Product Launch
+✓ Podcast Episode
+✓ Travel Vlog
+✓ YouTube Intro
+✓ Client Presentation
+
+Mock data should help evaluate the UI.
+
 **Known gaps:**
 - `glass.scss` mixin (`@mixin glass-panel`, `@mixin glass-text`) — defined but never `@include`d anywhere.
 - `animations.scss` mixins (`animate-fade-in`, `animate-scale-in`, `animate-slide-up`) — defined but never applied.

@@ -1,13 +1,19 @@
 <div class="project-card">
-  <div class="thumbnail">
-    @if (project().thumbnailUrl) {
-      <img [src]="project().thumbnailUrl" alt="Project preview" />
-    } @else {
-      <div class="placeholder">16:9 Thumbnail Placeholder</div>
-    }
+  <div class="project-card__thumbnail">
+    <img *ngIf="project().thumbnail" [src]="project().thumbnail?.url" [alt]="project().thumbnail?.alt" />
+    <div *ngIf="!project().thumbnail" class="project-card__placeholder">
+      <span class="project-card__placeholder-icon">🎬</span>
+    </div>
   </div>
-  <div class="info">
-    <h4>{{ project().title }}</h4>
-    <p class="meta">{{ project().sceneCount }} scenes • {{ project().durationMs / 1000 }}s</p>
+  <div class="project-card__content">
+    <h3 class="project-card__title">{{ project().title }}</h3>
+    <p class="project-card__description">{{ project().description }}</p>
+    <div class="project-card__meta">
+      <span class="project-card__scene-count">{{ project().sceneCount }} scenes</span>
+      <span class="project-card__duration">{{ project().durationMs | duration }}</span>
+    </div>
+    <div class="project-card__status">
+      <app-badge [status]="getStatusColor(project().status)">{{ project().status }}</app-badge>
+    </div>
   </div>
 </div>
