@@ -1,31 +1,35 @@
 # DemoFlow Project Status & Roadmap
 
 ## 1. Current Active Task
-- **Active Task File**: `docs/tasks/task_001_theme_wiring.md`
-- **Current Milestone**: Phase 1: UI Foundation
-- **Goal**: Wire the ThemeService into the root AppComponent so that theme attributes are correctly applied to the HTML document element.
+- **Active Task**: Phase 3 - Task 018 inside [REDESIGN_PLAN.md](file:///Users/andriidanichkin/Documents/myProjects/DemoFlow/docs/REDESIGN_PLAN.md)
+- **Goal**: Add Quick Actions widget card in dashboard side column.
+
+## 4. Recent Changes
+- [x] Redesigned Statistics Cards to premium SaaS style (Linear/Vercel aesthetic)
+   - Added icon support with styled container
+   - Added secondary text field for context (e.g., "+12 this month")
+   - Implemented dark premium surface with subtle border (12px border-radius)
+   - Added soft hover animation (translateY + border/background transition)
+   - Modern typography using design tokens only (no hardcoded colors)
+   - Responsive layout: 4 columns desktop, 2 columns tablet, 1 column mobile
+- [x] **Refined Statistics Cards UI** (height, spacing, icon, gradient updates)
+   - Reduced card min-height to 160px
+   - Tightened internal spacing (gap: space-3)
+   - Increased icon container to 40x40px with 16px font size
+   - Made accent color more visible (18% mix for icon bg, 40% for hover border)
+   - Added subtle 3px top gradient highlight using accent color at 20% opacity
+   - Improved dashboard page padding (space-6)
+   - All content left-aligned with flex-start alignment
+- [x] Updated StatisticsCardComponent interface with `secondaryText` optional field
+- [x] Redesigned HTML template with semantic BEM class structure
+- [x] Redesigned SCSS with design tokens from DESIGN_SYSTEM.md
+- [x] Dashboard component now passes icon and secondaryText per card
+- [x] Project builds successfully with no errors
 
 ---
 
 ## 2. Project Implementation Roadmap
-
-### Phase 1: UI Foundation
-- [ ] **Task 1: Wire ThemeService** (Target: `docs/tasks/task_001_theme_wiring.md`)
-- [ ] **Task 2: Adopt Shared UI Buttons** (Target: `docs/tasks/task_002_shared_ui_buttons.md`)
-- [ ] **Task 3: Migrate Inputs to Signals in AuthForm** (Target: `docs/tasks/task_003_auth_form_signals.md`)
-- [ ] **Task 4: Consolidate Modal and Dialog components** (Target: `docs/tasks/task_004_consolidate_overlays.md`)
-
-### Phase 2: Auth Flow & Guard Routing
-- [ ] **Task 5: Wire Functional AuthGuard** (Target: `docs/tasks/task_005_auth_guard_routing.md`)
-- [ ] **Task 6: Implement Login form submission logic** (Target: `docs/tasks/task_006_login_submissions.md`)
-
-### Phase 3: Dashboard & Projects List
-- [ ] **Task 7: Build Project Creation Wizard** (Target: `docs/tasks/task_007_create_project_wizard.md`)
-- [ ] **Task 8: Wire ProjectCard into Projects Grid** (Target: `docs/tasks/task_008_project_grid_mapping.md`)
-
-### Phase 4: Editor & Workspace
-- [ ] **Task 9: Create Editor Workspace Layout** (Target: `docs/tasks/task_009_editor_workspace_layout.md`)
-- [ ] **Task 10: Create Timeline Component** (Target: `docs/tasks/task_010_timeline_markers.md`)
+Refer to the complete task sequence inside [REDESIGN_PLAN.md](file:///Users/andriidanichkin/Documents/myProjects/DemoFlow/docs/REDESIGN_PLAN.md).
 
 ---
 
@@ -36,3 +40,7 @@
 - [x] Registered `provideHttpClient` in app configuration.
 - [x] Corrected SSR dynamic route configuration modes.
 - [x] Implemented Statistics Cards component for dashboard
+- [x] Implemented standard workspace grid container with fixed viewport bounds
+- [x] Implemented Dashboard Statistics Cards Redesign (Task 016)
+- [x] Refined Statistics Cards UI (height, spacing, icon, gradient, padding)
+- [x] Fixed 4-column grid layout by moving .statistics-grid to dashboard.scss (Angular ViewEncapsulation fix)
