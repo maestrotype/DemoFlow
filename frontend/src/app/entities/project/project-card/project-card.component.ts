@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Project } from '@entities/project';
+import { Project } from '@entities/project/model';
 import { BadgeComponent } from '@shared/ui/badge';
 import { DurationPipe } from '@shared/pipes/duration.pipe';
 import { CommonModule } from '@angular/common';
@@ -12,15 +12,4 @@ import { CommonModule } from '@angular/common';
 })
 export class ProjectCardComponent {
   readonly project = input.required<Project>();
-  
-  getStatusColor(status: string): string {
-    switch (status) {
-      case 'draft': return 'draft';
-      case 'in-progress': return 'in-progress';
-      case 'completed': return 'completed';
-      case 'archived': return 'archived';
-      default: return 'draft';
-    }
-  }
 }
-

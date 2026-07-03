@@ -13,7 +13,7 @@
       <span class="project-card__duration">{{ project().durationMs | duration }}</span>
     </div>
     <div class="project-card__status">
-      <app-badge [status]="getStatusColor(project().status)">{{ project().status }}</app-badge>
+      <app-badge [status]="project().status">{{ project().status }}</app-badge>
     </div>
   </div>
 </div>

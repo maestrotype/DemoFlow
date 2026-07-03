@@ -1,2 +1,2 @@
-export { ProjectCardComponent } from './project-card/project-card.component';
-export type { Project } from './project.model';
+export * from './model';
+export * from './mocks/projects.mock';
