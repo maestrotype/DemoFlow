@@ -1,0 +1,124 @@
+.project-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-surface);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--easing-smooth),
+              box-shadow var(--duration-fast) var(--easing-smooth);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.project-card__thumbnail {
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    background: linear-gradient(
+      135deg,
+      var(--color-bg-subtle) 0%,
+      var(--color-bg-surface) 100%
+    );
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--card-status-color, var(--color-text-muted));
+      opacity: 0.6;
+    }
+
+    &-icon {
+      font-size: 32px;
+      line-height: 1;
+      color: var(--color-text-muted);
+      opacity: 0.5;
+      user-select: none;
+    }
+
+    &-label {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      opacity: 0.4;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide);
+      font-weight: 500;
+    }
+  }
+}
+
+/* Status accent colors mapped from badge statuses */
+.project-card[data-status="completed"] .project-card__thumbnail__placeholder::after {
+  --card-status-color: var(--color-status-success);
+}
+
+.project-card[data-status="in-progress"] .project-card__thumbnail__placeholder::after {
+  --card-status-color: var(--color-status-warning);
+}
+
+.project-card[data-status="draft"] .project-card__thumbnail__placeholder::after {
+  --card-status-color: var(--color-text-muted);
+}
+
+.project-card__content {
+  padding: var(--space-3, 12px);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    margin: 0 0 var(--space-1, 4px) 0;
+    font-size: var(--text-base, 14px);
+    line-height: 1.3;
+  }
+
+  .project-card__description {
+    margin: 0 0 var(--space-2, 8px) 0;
+    font-size: var(--text-xs, 12px);
+    color: var(--color-text-secondary, #96a0b8);
+    flex: 1;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-2, 8px);
+    font-size: var(--text-xs, 12px);
+    color: var(--color-text-secondary, #96a0b8);
+  }
+
+  &__status {
+    margin-top: auto;
+  }
+}

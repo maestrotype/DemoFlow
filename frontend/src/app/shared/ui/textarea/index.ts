@@ -1,2 +1,2 @@
-export * from './textarea';
+export * from './textarea.component';
 export * from './textarea.types';

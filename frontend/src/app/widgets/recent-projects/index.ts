@@ -1,1 +1,1 @@
-export { RecentProjectsComponent } from './recent-projects';
+export { RecentProjectsComponent } from './recent-projects.component';

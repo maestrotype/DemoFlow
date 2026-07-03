@@ -1,186 +1,37 @@
-# Additional Engineering Rules
-
-## Evidence First
-
-Every engineering decision must be based on evidence.
-
-Acceptable evidence:
-
-* user request
-* AI_PROGRESS.md
-* project documentation
-* source code
-* compiler output
-* test failures
-* runtime errors
-
-Never rely on intuition.
-
----
-
-## Task Selection Rule
-
-Never invent the next task.
-
-The next task must originate from exactly one of:
-
-* explicit user request
-* AI_PROGRESS.md
-* documented blocker
-* failing build
-* failing tests
-* verified architectural issue
-
-If none exist,
-
-state that no engineering task can be selected.
-
----
-
-## Root Cause Rule
-
-Never fix symptoms.
-
-For every issue:
-
-1. identify the architectural problem
-2. identify the verified root cause
-3. explain why it appeared
-4. explain possible consequences
-
-Only then propose a solution.
-
----
-
-## One Problem At A Time
-
-Do not diagnose multiple unrelated problems.
-
-Solve one verified issue completely before moving to another.
-
----
-
-## Evidence Before Conclusions
-
-Never write:
-
-"I found the problem."
-
-Instead provide:
-
-Evidence:
-
-* compiler output
-* file
-* line
-* source code
-
-Then explain why this proves the root cause.
-
----
-
-## Compilation Error Rule
-
-When handling build errors:
-
-Never guess.
-
-Always identify:
-
-* exact compiler message
-* file
-* line
-* failing syntax
-
-Only after verification may the root cause be determined.
-
----
-
-## Solution Design Rule
-
-Always propose at least two solutions.
-
-Compare:
-
-* Architecture
-* Scalability
-* Maintainability
-* Angular Best Practices
-* SSR compatibility
-* FSD compliance
-* Performance
-* Technical debt
-
-Recommend exactly one.
-
-Wait for approval.
-
----
-
-## Implementation Gate
-
-Never modify any project file until:
-
-* analysis completed
-* root cause verified
-* two solutions compared
-* recommendation given
-* user approved implementation
-
-Reading is allowed.
-
-Editing before approval is forbidden.
-
----
-
-## Verification Rule
-
-Never claim success based on assumptions.
-
-Before completion verify:
-
-* requested changes exist
-* no unrelated changes
-* no duplicated code
-* SSR preserved
-* FSD preserved
-* no any
-* no console.log
-* no TODO
-* no disabled lint rules
-
-If verification cannot be completed,
-
-state it explicitly.
-
----
-
-## Project Memory Rule
-
-When a milestone is completed:
-
-Update AI_PROGRESS.md.
-
-Record facts only.
-
-Never write plans.
-
-Never write assumptions.
-
-Never duplicate previous entries.
-
----
-
-## Long-Term Architect Rule
-
-Behave as a permanent engineering team member.
-
-Do not summarize the project unless requested.
-
-Do not restart architectural discussions.
-
-Continue from the current milestone.
-
-Prefer continuation over repetition.
-
-Architecture decisions are persistent unless the user explicitly changes them.
+# DemoFlow AI Constitution
+> **Optimized for Qwen3-Coder-30B**
+
+## 1. Startup & Context Management
+- **Read ONLY 3 files at start**:
+  1. `docs/AI_CONSTITUTION.md` (this file)
+  2. `docs/PROJECT_STATUS.md` (current status & roadmap)
+  3. The active task file specified in `PROJECT_STATUS.md` (e.g. `docs/tasks/task_XXX.md`)
+- **Do NOT read other documentation files** (e.g. files in `docs/reference/`).
+- **Do NOT scan the repository** recursively. Only read the files explicitly listed in the active task file.
+- **Do NOT execute planning phases** or write solution comparisons. Begin coding immediately.
+
+## 2. Coding Restrictions
+- **No Architectural Changes**: Propose no refactorings, renames, or folder movements unless explicitly commanded by the active task file.
+- **Keep Components Small**:
+  - TypeScript logic: `< 150` lines of code.
+  - HTML template: `< 120` lines of code.
+  - SCSS styling: `< 200` lines of code.
+- **No Duplicate UI**: Always check `shared/ui/` first before creating buttons, inputs, modals, cards, badges, or spinners.
+- **Strict Typing**:
+  - Always use explicit types. Never use `any`.
+  - Use exact enums and union variants defined in `shared/ui/` components (e.g. `BadgeVariant`, `ButtonVariant`).
+- **No Placeholders or Logs**:
+  - Do NOT write `console.log`, `TODO`, `FIXME`, or temporary mock structures.
+  - Write complete production-ready code.
+
+## 3. Scope Boundaries
+- **Edit ONLY files** listed in the "Files to edit" section of the active task.
+- **NEVER edit files** listed in the "Files forbidden to edit" section.
+- **Do NOT modify documentation files** (except for updating the progress status in `docs/PROJECT_STATUS.md` upon completion).
+
+## 4. Compile, Fix & Verify
+- **Compile After Changes**: Immediately run the build command listed in the active task file (e.g., `npm run build` in the `frontend/` or `backend/` directory).
+- **Fix Compilation Errors Instantly**:
+  - If the build fails, stop immediately, read the error message, identify the file and line number, and fix the syntax or type conflict.
+  - Do NOT modify other unrelated code while fixing build errors.
+- **Commit Format**: Prepare a commit message exactly matching the active task spec template (Conventional Commits format).

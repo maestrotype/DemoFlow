@@ -1,2 +1,2 @@
-export * from './skeleton';
+export * from './skeleton.component';
 export * from './skeleton.types';

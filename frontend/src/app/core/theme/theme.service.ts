@@ -11,11 +11,14 @@ export class ThemeService {
   // User-selected theme (can be 'dark', 'light', or 'system')
   currentTheme = signal<ThemeMode>('system');
 
+  // Private signal to track system color scheme preference reactively
+  private systemPrefersDark = signal<boolean>(false);
+
   // Computed resolved theme (actual theme applied)
   resolvedTheme = computed<'dark' | 'light'>(() => {
     const current = this.currentTheme();
     if (current === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      return this.systemPrefersDark() ? 'dark' : 'light';
     }
     return current as 'dark' | 'light';
   });
@@ -123,18 +126,20 @@ export class ThemeService {
     // Only run in browser
     if (!isPlatformBrowser(this.platformId)) return;
 
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    this.systemPrefersDark.set(mediaQuery.matches);
+
     // Check for saved theme preference or system preference
     const savedTheme = localStorage.getItem('theme') as ThemeMode | null;
     if (savedTheme) {
       this.setTheme(savedTheme);
     } else {
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.setTheme(systemPrefersDark ? 'dark' : 'light');
+      this.setTheme(mediaQuery.matches ? 'dark' : 'light');
     }
 
     // Listen for system theme changes when in 'system' mode
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', () => {
+    mediaQuery.addEventListener('change', (e) => {
+      this.systemPrefersDark.set(e.matches);
       if (this.currentTheme() === 'system') {
         const resolved = this.resolvedTheme();
         this.applyTheme(resolved);

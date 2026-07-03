@@ -1,0 +1,14 @@
+<div class="stat-card">
+  <div class="stat-card__header">
+    @if (statistic().icon) {
+      <span class="stat-card__icon" aria-hidden="true">
+        <i [class]="statistic().icon"></i>
+      </span>
+    }
+    <span class="stat-card__title">{{ statistic().title }}</span>
+  </div>
+  <span class="stat-card__value">{{ statistic().value }}</span>
+  @if (statistic().secondaryText) {
+    <span class="stat-card__secondary">{{ statistic().secondaryText }}</span>
+  }
+</div>

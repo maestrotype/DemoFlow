@@ -1,2 +1,2 @@
-export * from './dropdown';
+export * from './dropdown.component';
 export * from './dropdown.types';
