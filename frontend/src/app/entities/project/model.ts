@@ -15,3 +15,10 @@ export interface Project {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface Statistics {
+  totalProjects: number;
+  videos: number;
+  exports: number;
+  storageUsed: string;
+}

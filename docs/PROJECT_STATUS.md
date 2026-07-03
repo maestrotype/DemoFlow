@@ -35,3 +35,4 @@
 - [x] Fixed href issues in authentication layout by replacing `<a href>` with `[routerLink]`.
 - [x] Registered `provideHttpClient` in app configuration.
 - [x] Corrected SSR dynamic route configuration modes.
+- [x] Implemented Statistics Cards component for dashboard

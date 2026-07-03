@@ -14,3 +14,4 @@ export * from './spinner';
 export * from './card';
 export * from './modal';
 export * from './theme-toggle/theme-toggle.component';
+export * from './statistics-card/statistics-card.component';

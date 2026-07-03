@@ -2,5 +2,12 @@
   <header class="page-header">
     <h1>Dashboard</h1>
   </header>
+  
+  <div class="statistics-grid">
+    @for (card of statisticCards; track card.title) {
+      <app-statistics-card [statistic]="card" />
+    }
+  </div>
+  
   <app-recent-projects />
 </div>
