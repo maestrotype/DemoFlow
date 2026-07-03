@@ -1,50 +1,54 @@
 .sidebar {
-  width: 280px;
+  width: 180px;
   height: 100vh;
   background: var(--color-bg-surface);
-  border-right: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border-subtle);
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: var(--space-4);
 }
 
 .logo {
-  height: 72px;
-  padding: 0 0 0 24px;
-  font-size: var(--text-xl, 24px);
-  font-weight: 700;
-  color: var(--color-text-primary);
+  height: 56px;
   display: flex;
   align-items: center;
+  padding-left: var(--space-3);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
 }
 
 .navigation {
   flex: 1;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  height: 44px;
-  padding: 0 16px;
+  height: 40px;
+  padding: 0 var(--space-3);
   color: var(--color-text-secondary);
   text-decoration: none;
-  border-radius: 12px;
-  margin-bottom: 8px;
-  transition: background-color 150ms, color 150ms;
-  position: relative;
+  border-radius: 8px;
+  transition: background-color 150ms ease, color 150ms ease;
+  cursor: pointer;
 
   .nav-icon {
-    margin-right: 12px;
-    font-size: 18px;
-    width: 24px;
+    margin-right: var(--space-3);
+    font-size: 16px;
+    width: 20px;
     text-align: center;
+    flex-shrink: 0;
   }
 
   .nav-text {
-    font-size: var(--text-base, 14px);
+    font-size: var(--text-sm);
     font-weight: 500;
+    white-space: nowrap;
   }
 
   &:hover {

@@ -44,3 +44,5 @@ Refer to the complete task sequence inside [REDESIGN_PLAN.md](file:///Users/andr
 - [x] Implemented Dashboard Statistics Cards Redesign (Task 016)
 - [x] Refined Statistics Cards UI (height, spacing, icon, gradient, padding)
 - [x] Fixed 4-column grid layout by moving .statistics-grid to dashboard.scss (Angular ViewEncapsulation fix)
+- [x] Redesigned Sidebar to compact width (280px → 180px) using design tokens
+- [x] Redesigned Project Card missing thumbnail placeholder with gradient background, status accent bar, and premium hover effects

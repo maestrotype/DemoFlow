@@ -1,8 +1,9 @@
-<div class="project-card">
+<div class="project-card" [attr.data-status]="project().status">
   <div class="project-card__thumbnail">
     <img *ngIf="project().thumbnail" [src]="project().thumbnail?.url" [alt]="project().thumbnail?.alt" />
-    <div *ngIf="!project().thumbnail" class="project-card__placeholder">
-      <span class="project-card__placeholder-icon">🎬</span>
+    <div *ngIf="!project().thumbnail" class="project-card__thumbnail__placeholder">
+      <span class="project-card__thumbnail__placeholder-icon">🎬</span>
+      <span class="project-card__thumbnail__placeholder-label">No preview</span>
     </div>
   </div>
   <div class="project-card__content">
